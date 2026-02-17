@@ -9,6 +9,11 @@ body{
     margin:0;
     padding:0;
     align-content: center;
+    font-weight: 400;
+}
+b{
+    font-weight: 900;
+    background-color: #2d2e35;
 }
 h1{
     font-weight: 800;
@@ -45,4 +50,10 @@ a{
 .headerAnchors:hover{
     color: #ee4c4c;
 }
-
+.textBox{
+    display: block;
+    background-color:#24252a;
+    border: 1px none ;
+    border-radius: 1rem;
+    padding: 0.1rem 0.5rem 0.1rem 1rem;
+}
