@@ -2,6 +2,7 @@
 
 
 @import "https://www.nerdfonts.com/assets/css/webfont.css";
+
 body{
     font-family: "JetBrains Mono", monospace;
     color: beige;
@@ -56,4 +57,13 @@ a{
     border: 1px none ;
     border-radius: 1rem;
     padding: 0.1rem 0.5rem 0.1rem 1rem;
+}
+.warning{
+    display: block;
+    background-color:#24252a;
+    border: 1px none ;
+    border-left: 5px solid rgb(222, 178, 4);
+    border-radius: 0.5rem;
+    padding: 0.1rem 0.5rem 0.1rem 1rem;
+    color: rgb(222, 178, 4);
 }
