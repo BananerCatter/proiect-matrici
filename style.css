@@ -54,6 +54,14 @@ a{
 }
 .headerAnchors:hover{
     color: #ee4c4c;
+    font-size: 25px;
+    font-size-adjust: 20px;
+}
+
+.headerAnchors{
+    font-weight: bold;
+    font-size: 20px;
+    transition: all 500ms;
 }
 a:hover{
     color: #ee4c4c;
