@@ -25,6 +25,31 @@
             <p>Ca la tablourile unidimensionale, liniile si coloanele matricilor se indexează de la <b>0</b></p>
             <p>De exemplu, folosind matricea de mai devreme, <b>a[0][2]</b> va accesa elementul din prima linie și a treia coloană</p>
             <p><h3>Observație: </h3>Cade în sarcina programatorului să se asigure că valorile indicilor folosiți în expresiile de indexare fac parte din intervalul corect, conform declarării tabloului. Dacă valorile indicilor nu sunt corecte, comportamentul programului este imprevizibil: rezultatele obținute vor fi eronate sau se vor produce erori la execuție. </p>
+            <h2>Parcurgerea martricilor</h2>
+            <p>Parcurgerea presupune accesarea elementelor curente ale matricei, într-o anumită ordine. <b>De regulă aceasta se face pe linii, de sus în jos și de la stânga la dreapta:</b></p>
+            <div class="textBox">
+                <pre>int n, m, A[100][100];
+... 
+for(int i = 0 ; i < n ; i ++) 
+{ 
+    // linia i 
+    for(int j = 0 ; j < m ; j ++) 
+        // A[i][j] 
+    // .....
+}</pre>
+            
+            </div>
+            <p>Iar de la stanga la dreapta și sus în jos:</p>
+            <div class="textBox">                            <pre>int n, m, A[100][100];
+... 
+for(int i = 0 ; i < n ; i ++) 
+{ 
+    // coloana i 
+    for(int j = 0 ; j < m ; j ++) 
+        // A[j][i] 
+    // .....
+}</pre></div>
+
             <h2>Utilizarea matricilor ca argumentele unor funcții</h2>
             <div class="warning">
                 <p><i class="nf nf-cod-warning"></i> Atunci când folosim o matrice ca argumentul unei funcții, dimensiunea acesteia trebuie specificată întotdeauna</p>
@@ -37,6 +62,14 @@
             <div class="textBox">
                 <p>✅   int func(int mat[15][20]){...</p>
             </div>
+            <h3>
+                <p>Următoarele capitole:</p>
+                <ol>
+                    <li style="color: #ee4c4c;"><a href="2.html">Matrici pătratice</a></li>
+                    <li style="color: #ee4c4c;"><a href="3.html">Algoritmi avansați</a></li>
+                </ol>
+            </h3>
+            <p></p>
         </div>
     </body>
 </html>

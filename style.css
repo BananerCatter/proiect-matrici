@@ -11,6 +11,7 @@ body{
     padding:0;
     align-content: center;
     font-weight: 400;
+    overflow-x: hidden;
 }
 b{
     font-weight: 900;
@@ -35,11 +36,14 @@ a{
     font-style: normal;
     color: inherit;
     text-decoration: none;
+    transition: color 0.3s;
+    color: rgb(252, 168, 142);
 }
 .content{
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+    
 }
 
 .headerAnchors{
@@ -51,13 +55,26 @@ a{
 .headerAnchors:hover{
     color: #ee4c4c;
 }
+a:hover{
+    color: #ee4c4c;
+}
+.nf-md-cat{
+    display: inline-block;
+    transition: transform 0.3s;
+}
+.nf-md-cat:hover{
+    transform: rotate(180deg);
+}
 .textBox{
     display: block;
     background-color:#24252a;
     border: 1px none ;
     border-radius: 1rem;
     padding: 0.1rem 0.5rem 0.1rem 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
+
 .warning{
     display: block;
     background-color:#24252a;

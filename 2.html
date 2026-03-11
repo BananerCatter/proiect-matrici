@@ -10,8 +10,61 @@
             <h1><div class="headerAnchors""><a href="index.html"><i class="nf nf-md-cat"></i></a></div></h1><a href="1.html" class="headerAnchors">Noțiuni de bază</a><a href="2.html" class="headerAnchors">Matrici Patratice</a><a href="3.html" class="headerAnchors">Chestii mai complicate 🙀</a>
         </header>
         <div class="content">
-            <h1>Hello!</h1>
-
+            <h1>Matrici pătratice</h1>
+            <h2>Definiție:</h2>
+            <p>Matricile pătratice sunt matrici care au acelasi număr de linii și coloane:</p>
+            <div class="textBox"><p>int a[n][n];</p></div>
+            <p>Urmatoarea matrice ar avea dimesiunea de n<sup>2</sup>, justificând astfel numele de matrice pătratică</p>
+            <p>Într-o matrice pătratică se disting o categorie specială de elemente, diagonalele. Un element al matricei aparține sau nu diagonalelor sau zonelor delimitate de acestea dacă respectă anumite reguli, ce depind de indicii elementului. În cele ce urmează, pentru un element al matricei vom nota cu i indicele de linie și cu j indicele de coloană.</p>
+            <h2>Diagonala principală</h2>
+            <p>Pe diagonala principală, <b>i == j</b> Elementele sunt parcurse astfel:</p>
+                        <div class="textBox">
+                <pre>
+for(int i = 0 ; i < n ; i ++)
+{
+    // A[i][i]
+}
+                </pre>
+            </div>
+            <p>Pe diagonala secundară, daca matricea e indexată de la 0, <b>i + j == n - 1</b>, iar daca e indexată de la 1, <b>i + j == n + 1</b></p>
+            <div style="display: flex; flex-direction: row; width: 100%; justify-content: space-around;">
+                <div class="textBox" style="align-self: flex-start; flex:1;">
+                <pre>
+//indexare de la 0
+for(int i = 0 ; i < n ; i ++)
+{
+    // A[i][n - 1 - i]
+}
+                </pre>
+            </div>
+                <div class="textBox" style="align-self: flex-end; flex:1;">
+                <pre>
+//indexare de la 1
+for(int i = 0 ; i < n ; i ++)
+{
+    // A[i][n + 1 - i]
+}
+                </pre>
+            </div>
+            </div>
+            <h2>Elementele delimitate de diagonala principală:</h2>
+            <ul>
+                <li>Sub diagonală: <b>i < j</b></li>
+                <li>Peste diagonală: <b>i > j</b></li>
+            </ul>
+            <h2>Elementele delimitate de diagonala secundară</h2>
+            <ul><p>Indexare de la 0: </p>
+                <li>Sub diagonală: <b>i + j < n - 1</b></li>
+                <li>Peste diagonală: <b>i + j > n - 1</b></li>
+            </ul>
+            <ul><p>Indexare de la 1: </p>
+                <li>Sub diagonală: <b>i + j < n + 1</b></li>
+                <li>Peste diagonală: <b>i + j > n + 1</b></li>
+            </ul>
+                <p>Următoarul capitol:</p>
+                <ul>
+                    <li style="color: #ee4c4c;"><a href="3.html">Algoritmi avansați</a></li>
+                <ul>
         </div>
     </body>
 </html>
