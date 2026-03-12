@@ -3,6 +3,7 @@
     <head>
         <link rel="stylesheet" href="nerdfonts/webfont.css">
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/x-icon" href="https://images.emojiterra.com/google/android-11/512px/1f63a.png">
         <title>Matrici</title>
     </head>
     <body>
@@ -11,11 +12,235 @@
         </header>
         <div class="content">
             <h1>Algoritmul de Fill</h1>
-            <p>
-    Ce este si ce face acest algoritm?
+            <p>Ce este si ce face acest algoritm? Acest algoritm este un algoritm ce se foloseste de obicei atunci cand avem de lucru cu o matrice. Ce facest acest algoritm? Are multe aplicatii, dar una din cele mai practice este atunci cand determinam numarul elementelor dintr-o matrice care respecta o anumita conditie.</p>
+            <h2>Prezentare generală</h2>
+            <p>Algoritmul de fill este un algoritm special prin care pargcurgem matricea si determinam cate parti distincte avem intr-o problema. In general acest algoritm se aplica doar pe probleme specifice. Una dintre aceste probleme specifice a fost problema „ferma”, data in 2014 in cadrul Olimpiadei Judetene de Informatica.</p>
+            <h2>problema "ferma"</h2>
+            <p>Un fermier deţine o fermă de formă dreptunghiulară cu lungimea m metri şi lăţimea n metri. Respectând principiul rotaţiei culturilor, fermierul şi‑a realizat un plan pentru semănarea culturilor în noul an. Astfel ,el a desenat un dreptunghi pe care l-a împărţit în m * n celule, fiecare corespunzând unui metru pătrat, şi a colorat în culori diferite zonele care corespund unor culturi diferite. O cultură poate fi semănată pe mai multe parcele. Două celule care au o latură comună aparţin aceleiaşi parcele dacă au aceeaşi culoare (sunt însămânţate cu aceeaşi cultură). Fermierul are posibilitatea să irige o sigură parcelă şi doreşte să aleagă parcela cu cea mai mare suprafaţă.</p>
+            <h2>Vectorii de deplasare</h2>
+            <p>Dupa cum am discutat si in Algoritmul lui Lee in C++ , se aplica „vectorii de deplasare”. Trebuie mai intai sa depistam daca este vorba despre o problema in care luam 4 vecini in considerare, sau 8 vecini. Luam 4 vecini atunci cand se mentioneaza doar directiile „Nord, Sud, Est, Vest”. Astfel, dupa cum urmeaza, avem <b>nordul (0,1), sudul (0,-1), vestul (1,0) si estul (-1,0).</b> Cei doi vectori sunt:</p>
+                <div class="textBox">
+                    <p>int di[4] = {1,0,-1,0};</p>
+                    <p>int dj[4] = {0,1,0,-1};</p>
+                </div>
+            <h2>Citirea valorilor din problemă </h2>
+            <p>In datele de intrare avem 3 numere: V, M si N. V reprezinta prima sau a doua cerinta din problema, iar M si N reprezinta dimensiunea matricei. Mai departe vom rezolva doar cerinta 1 deoarece scoate in evidenta mai bine Algoritmul de fill (sau de umplere).</p>
+            <h2>Funcția OK</h2>
+            <p>Un detaliu foarte important este faptul ca vom construii doua matrici. O matrice in care stocam numerele citite la intrare, si o matrice in care vom memora numarul zonei in care am fost. Astfel incat functia OK permite doar elemente ce sunt in interiorul matricei si elemente ce nu au fost deja atribuite unei „insule”.</p>
+                <div class="textBox">
+                <pre>
+    bool OK(int i, int j)
 
-Acest algoritm este un algoritm ce se foloseste de obicei atunci cand avem de lucru cu o matrice. Ce facest acest algoritm? Are multe aplicatii, dar una din cele mai practice este atunci cand determinam numarul elementelor dintr-o matrice care respecta o anumita conditie.</p>
+{
+        
+        if(i < 1 || j < 1 || i > N || j > M)
+            
+            return false;
+        
+        if(matriceFill[i][j] != 0)
+            
+            return false;
+        
+        return true;
 
+}
+                </pre>
+                   
+                </div>
+        <h2>Algoritmul de Fill</h2>
+        <div class="textBox">
+            <pre>
+        void algFill(int x, int y)
+
+{
+            
+            matriceFill[x][y] = numarul_zonei; //Memoram in matricea Fill, numarul zonei in care suntem acum
+    
+            d[numarul_zonei]++; //Incrementam cate elemente fac parte in acest moment din insula curenta
+    
+            for(int i = 0; i < 4; i++)
+    
+    {
+        
+                int noul_i = x + di[i]; //Formam noul i pe care il vom accesa
+        
+                int noul_j = y + dj[i]; //Formam noul j pe care il vom accesa
+        
+                if(OK(noul_i, noul_j) && matrice[x][y] == matrice[noul_i][noul_j]) // Daca elementul curent este corespunzator, executam algoritmul
+        
+                    algFill(noul_i, noul_j); // Apelam recursiv algoritmul de Fill
+    
+    }
+
+}
+            </pre>
+         </div>
+         <hr>
+        
+         <h1>Algoritmul lui Lee</h1>
+         <p>Algoritmul lui Lee este folosit pentru determinarea ieșirii dintr-un labirint sau în alte probleme similare cu aceasta.
+
+        <p>Considerăm un labirint reprezentat printr-o matrice cu n linii și m coloane, în care elementele egale cu 0 reprezintă camere libere, iar cele egale cu 1 reprezintă camere blocat. Un mobil se deplasează prin labirint, trecând dintr-o cameră în alta dacă acestea se învecinează pe linie sau pe coloană. Determinați numărul minim de pași pe care îi face mobilul pentru a ieși din labirint (a ajunge pe chenarul matricei).</p>
+
+        <h2>Pentru rezolvarea problemei procedăm astfel:</h2>
+        <li>marcăm în matrice elementele libere cu 0, iar obstacolele cu -1 (valorile pozitive sunt folosite în alt scop)</li>
+        <li>marcăm poziția de start cu 1</li>
+        <li>pentru fiecare <b>k=1,2,3,...</b></li>
+        <li><b>analizăm elementele marcate cu valoarea k și marcăm cu k+1 toți vecinii săi care sunt liberi și nemarcați</b></li>
+        <li><b>dacă pentru un anumit k nu găsim niciun element egal cu k, ne oprim</b></li>
+        <h2>Lee cu coadă</h2>
+        <p>Dacă pentru fiecare k parcurgem toate elementele matricei labirint pentru a identifica elementele egale cu k, algoritmul de mai sus este neeficient. </p>
+        <h3>O soluție mult mai bună este să folosim o coadă</h3>
+        <li>marcăm poziția de început cu 1 și o adăugăm în coadă</li>
+        <li>expandăm coada. Cât timp coada este nevidă: </li>
+        <li><b>scoatem din coadă un element, cu coordonatele (i,j)</b></li>
+        <li><b>analizăm vecinii acestuia: </b></li>
+        <li><b>dacă vecinul curent (iv,jv) este liber și nemarcat, îl marcăm în matrice cu o valoare mai mare cu 1 decât elementul (i,j) – A[iv][jv] = A[i][j] + 1; – și îl adăugăm în coadă.</b></li>
+        <h2>Implementare în c++</h2>
+            <div class="textBox">
+                <pre>
+void Lee(int istart ,int jstart)
+
+{
+    
+    queue<pair<int,int>> Q;
+    
+    //initializare coada
+   
+    Q.push(make_pair(istart , jstart));
+    
+    //marcare pozitie de start
+    
+    A[istart][jstart] = 1;
+   
+    while(! Q.empty()) // cat timp coada este nevida
+    
+    {   
+    
+        int i = Q.front().first, j = Q.front().second; // determinam elementul de la inceputul cozii
+       
+        for(int k = 0 ; k < 4 ; k ++)
+       
+        {
+            
+            int iv = i + di[k], jv = j + dj[k]; // coordonatele vecinului
+           
+            if(iv >= 1 && iv <= n && jv >= 1 && jv <= m // element în matrice
+               
+            && A[iv][jv] == 0) // element liber si nemarcat
+            
+            {
+                
+                // marcam elementul vecin cu o valoare mai mare
+                
+                A[iv][jv] = A[i][j] + 1;
+                
+                // il adaugam in coada
+                
+                Q.push(make_pair(iv , jv));
+           
+            }
+        
+        }
+       
+        Q.pop(); // eliminam din coada
+   
+    }
+
+}
+                </pre>
+            </div>
+        <h2>Reconstituirea traseului</h2>
+        <p>În unele probleme se dau două poziții în matricea labirint, <b>(istart,jstart)</b> și <b>(istop,jstop)</b> și se cere determinarea celui mai scurt traseu de la poziția <b>(istart,jstart)</b> la poziția <b>(istop,jstop)</b>.</p>
+        <p>Operația se va realiza începând de la poziția finală spre cea inițială. Dacă poziția curentă a traseului are coordonatele <b>(i,j)</b>, atunci poziția de dinainte va fi acel vecin <b>(iv,jv)</b> pentru care <b>A[i][j] == A[iv][jv] + 1</b>. Dacă sunt mai mulți asemenea vecini, oricare dintre ei este corect.</p>
+        <p>Deoarece elementele traseului se determină în ordine inversă, nu putem să afișăm direct coordonatele elementelor de pe traseu. Avem două soluții:</p>
+        <li>să reconstituim traseul folosind un subprogram recursiv, care să aibă ca parametri coordonatele elementului curent, autoapelul să se facă pentru coordonatele vecinului aflat în traseul determinat înaintea elementului curent, iar afișarea să se facă la revenirea din autoapel;</li>
+        <br>
+        <li>să reconstitui traseul iterativ și să memorăm coordonatele elementelor de pe traseu într-o structură corespunzătoare (tablou unidimensional de structuri, vector din STL, pereche de tablouri unidimensionale), iar la final să afișam elementele structurii de date în ordine inversă.</li>
+        <h3>Reconstituire recursivă</h3>
+            <div class="textBox">
+                <pre>
+void Traseu(int i, int j , int lg)
+
+{
+    
+    if(A[i][j] == 1)
+    
+    {
+        
+        cout << lg << "\n";
+        
+        cout << i << " " << j << "\n";
+    
+    }
+    
+    else
+   
+    {
+        
+        int p = -1;
+        
+        for(int k = 0 ; k < 4 && p == -1 ; k ++)
+            
+            if(A[i][j] == A[i+di[k]][j+dj[k]] + 1)
+                
+                    p = k;
+        
+        Traseu1(i + di[p] , j + dj[p] , lg + 1);
+       
+        cout << i << " " << j << "\n";
+   
+    }
+
+}
+                </pre>
+            </div>
+    <p>uncția C++ de mai sus afișează mai întâi lungimea traseului, apoi coordonatele elementelor de pe traseu. Desigur, lungimea traseului putea fi determinată în mod direct, din matrice. Apelul principal va fi:</p>
+        <div class="textBox">
+            <p>Traseu(istart , jstart , 1);<p>
         </div>
+    <h3>Reconstituire nerecursivă</h3>
+    <div class="textBox">
+        <pre>
+void Traseu2(int istop, int jstop)
+
+{
+    
+    vector<pair<int,int>> V;
+    
+    int i = istop , j = jstop;
+    
+    V.push_back(make_pair(i , j));
+    
+    do
+    
+    {
+        
+        int p = -1;
+        
+        for(int k = 0 ; k < 4 && p == -1 ; k ++)
+            
+            if(A[i][j] == A[i+di[k]][j+dj[k]] + 1)
+                
+                p = k;
+       
+        i = i + di[p] , j = j + dj[p];
+        
+        V.push_back(make_pair(i , j));
+    
+    }
+    while(A[i][j] != 1);
+    
+    cout << V.size() << '\n';
+    
+    for(vector<pair<int,int>>::reverse_iterator I = V.rbegin() ; I != V.rend() ; I ++)
+        
+        cout << I->first << " " << I->second << '\n';
+
+}
+        </pre>
+    </div>
+   
+    </div>
     </body>
 </html>
